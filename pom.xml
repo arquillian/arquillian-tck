@@ -83,6 +83,9 @@
 
     <modules>
         <module>container</module>
+<!--
+        <module>doclet</module>
+ -->
     </modules>
 
     <build>

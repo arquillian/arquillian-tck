@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="Game">
+  <head>
+    <meta charset="utf-8" />
+    <title>Arquillian &#183; Write Real Tests</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="An innovative testing platform for the Java Virtual Machine (JVM). Open source. Highly extensible." name="description" />
+   
+    <link href="style/screen.css" rel="stylesheet" />
+    <script src="javascript/jquery.min.js"></script>    
+    
+    <script>
+		$(function() {
+			$.ajax('api/tck.json', {
+				success: function(data, status) {
+					$("#tck").append(data)
+				}})
+		})
+    </script>
+
+  </head>
+  <body class="home">
+    <header class="navbar navbar-fixed-top" id="banner" role="banner">
+      <div class="navbar-inner" style="overflow:visible">
+        <div class="container">
+          <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+      </div>
+    </header>
+    
+    <div id="main">
+
+      <br/>
+      <div id="tck"></div>
+
+    </div>
+    <script>
+      $(function() {
+        $('html').addClass('ready');
+        //activateFooterGravity();
+        //activateTooltips();
+        activateToTopControl();
+      });
+    </script>
+    <script src="javascript/bootstrap.js"></script>
+    <script src="javascript/siphon-20120407.js"></script>
+    <script src="javascript/site.js"></script>
+  </body>
+</html>

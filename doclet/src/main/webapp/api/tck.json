@@ -1,0 +1,420 @@
+[
+  {
+    "text": "In order to test CDI beans\n As a Tester\n I want to be able to access CDI beans from the TestClass via injection",
+    "className": "org.arquillian.tck.container.cdi_1_0.CDIBeanLookupWarTestCase",
+    "categories": [
+      "EE6",
+      "CDI",
+      "War"
+    ],
+    "givens": [
+      {
+        "text": "Given a single CDI Bean in a single WebArchive\n ; And the Test run in Container"
+      },
+      {
+        "text": "; And an Injected CDI Bean"
+      }
+    ],
+    "thens": [
+      {
+        "methodName": "shouldInjectToInstance",
+        "methodSignature": "()",
+        "text": "Then the CDI Bean should be accessible\n ; And be injectable as an Instance Variable"
+      },
+      {
+        "methodName": "shouldInjectToMethodArgument",
+        "methodSignature": "(org.arquillian.tck.container.cdi_1_0.EchoBean)",
+        "text": "Then the CDI Bean should be accessible\n ; And be injectable as an Method Argument"
+      }
+    ]
+  },
+  {
+    "text": "In order to avoid duplicate configuration\n As a Tester\n I want to be able to reuse the information the container has available",
+    "className": "org.arquillian.tck.container.servlet_2_5.MultipleWebContextLookupEarTestCase",
+    "categories": [
+      "EE5",
+      "Servlet",
+      "Ear"
+    ],
+    "givens": [
+      {
+        "text": "Given two different Servlets in two different WebArchives inside an EnterpriseArchive\n ; And the Servlets are configured via web.xml\n ; And the Test run on the Client side"
+      },
+      {
+        "text": "; And a non targeted URL Resource Lookup"
+      },
+      {
+        "text": "; And a targeted URL Resource lookup for the Servlet in the first WebArchive"
+      },
+      {
+        "text": "; And a targeted URL Resource lookup for the Servlet in the second WebArchive"
+      }
+    ],
+    "thens": [
+      {
+        "methodName": "shouldInjectNonTargetedServletToInstance",
+        "methodSignature": "()",
+        "text": "Then the Non Targeted URL should reference the root of the Servers Web Context\n ; And be injectable as an Instance Variable"
+      },
+      {
+        "methodName": "shouldInjectNonTargetedServletToMethodArgument",
+        "methodSignature": "(java.net.URL)",
+        "text": "Then the Non Targeted URL should reference the root of the Servers Web Context\n ; And be injectable as a Method Argument Variable"
+      },
+      {
+        "methodName": "shouldInjectTargetedEchoServletToInstance",
+        "methodSignature": "()",
+        "text": "Then the Targeted URL should reference the root of the Web Context where the Target is located\n ; And be injectable as an Instance Variable"
+      },
+      {
+        "methodName": "shouldInjectTargetedEchoServletToMethodArgument",
+        "methodSignature": "(java.net.URL)",
+        "text": "Then the Targeted URL should reference the root of the Web Context where the Target is located\n ; And be injectable as a Method Argument Variable"
+      },
+      {
+        "methodName": "shouldInjectTargetedReverseEchoServletToInstance",
+        "methodSignature": "()",
+        "text": "Then the Targeted URL should reference the root of the Web Context where the Target is located\n ; And be injectable as an Instance Variable"
+      },
+      {
+        "methodName": "shouldInjectTargetedReverseEchoServletToMethodArgument",
+        "methodSignature": "(java.net.URL)",
+        "text": "Then the Targeted URL should reference the root of the Web Context where the Target is located\n ; And be injectable as a Method Argument Variable"
+      }
+    ]
+  },
+  {
+    "text": "In order to avoid duplicate configuration\n As a Tester\n I want to be able to reuse the information the container has available",
+    "className": "org.arquillian.tck.container.servlet_2_5.MultipleWebContextLookupMultiWarTestCase",
+    "categories": [
+      "EE5",
+      "Servlet",
+      "War",
+      "MultiDeployment"
+    ],
+    "givens": [
+      {
+        "text": "Given two different Servlets in two separate deployed WebArchives\n ; And the Servlets are configured via web.xml\n ; And the Test run on the Client side\n ; And one WebArchive is default and the one is named"
+      },
+      {
+        "text": "; And a non targeted URL Resource Lookup"
+      },
+      {
+        "text": "; And a non targeted URL Resource lookup Operating in the context of the second WebArchive"
+      },
+      {
+        "text": "; And a targeted URL Resource lookup for the Servlet in the second WebArchive"
+      }
+    ],
+    "thens": [
+      {
+        "methodName": "shouldInjectNonTargetedServletToInstance",
+        "methodSignature": "()",
+        "text": "Then the Non Targeted URL should reference the root of the first WebArchive Context when running in the default Context\n ; And be injectable as an Instance Variable"
+      },
+      {
+        "methodName": "shouldInjectNonTargetedServletToInstanceFromSameContext",
+        "methodSignature": "()",
+        "text": "Then the Non Targeted URL should reference the root of the second WebArchive \n ; When running in the named Context\n ; And be injectable as an Instance Variable"
+      },
+      {
+        "methodName": "shouldInjectNonTargetedServletToMethodArgument",
+        "methodSignature": "(java.net.URL)",
+        "text": "Then the Non Targeted URL should reference the root of the first WebArchive \n ; When running in the default Context\n ; And be injectable as a Method Argument Variable"
+      },
+      {
+        "methodName": "shouldInjectNonTargetedServletToInstanceFromNamedContext",
+        "methodSignature": "()",
+        "text": "Then the Non Targeted URL that Operates in the context of the second WebArchive should reference the root of the second WebArchive\n ; When running in the default Context\n ; And be injectable as an Instance Variable"
+      },
+      {
+        "methodName": "shouldInjectNonTargetedServletToMethodArgumentFromNamedContext",
+        "methodSignature": "(java.net.URL)",
+        "text": "Then the Non Targeted URL that Operates in the context of the second WebArchive should reference the root of the second WebArchive\n ; When running in the default Context\n ; And be injectable as a Method Argument Variable"
+      },
+      {
+        "methodName": "shouldInjectTargetedReverseServletToInstanceFromNamedContext",
+        "methodSignature": "()",
+        "text": "Then the Targeted URL that Operates in the context of the second WebArchive should reference the Web Context where the Target is located \n ; When running in the default Context\n ; And be injectable as an Instance Variable"
+      },
+      {
+        "methodName": "shouldInjectTargetedReverseServletToMethodArgumentFromNamedContext",
+        "methodSignature": "(java.net.URL)",
+        "text": "Then the Targeted URL that Operates in the context of the second WebArchive should reference the Web Context where the Target is located \n ; When running in the default Context\n ; And be injectable as a Method Argument Variable"
+      },
+      {
+        "methodName": "shouldInjectTargetedReverseServletToMethodArgumentFromSameContext",
+        "methodSignature": "(java.net.URL)",
+        "text": "Then the Targeted URL that Operates in the context of the second WebArchive should reference the Web Context where the Target is located \n ; When running in the named Context\n ; And be injectable as a Method Argument Variable"
+      }
+    ]
+  },
+  {
+    "text": "In order to avoid duplicate configuration\n As a Tester\n I want to be able to reuse the information the container has available",
+    "className": "org.arquillian.tck.container.servlet_2_5.WebContextLookupWarTestCase",
+    "categories": [
+      "EE5",
+      "Servlet",
+      "War"
+    ],
+    "givens": [
+      {
+        "text": "Given a single Servlet in a single WebArchive\n ; And the Servlet is configured via web.xml\n ; And the Test run on the Client side"
+      },
+      {
+        "text": "; And a non targeted URL Resource Lookup"
+      },
+      {
+        "text": "; And a targeted URL Resource lookup for the Servlet in the WebArchive"
+      }
+    ],
+    "thens": [
+      {
+        "methodName": "shouldInjectNonTargetedServletToInstance",
+        "methodSignature": "()",
+        "text": "Then the Non Targeted URL should reference the root of the only Web Context\n ; And be injectable as an Instance Variable"
+      },
+      {
+        "methodName": "shouldInjectNonTargetedServletToMethodArgument",
+        "methodSignature": "(java.net.URL)",
+        "text": "Then the Non Targeted URL should reference the root of the only Web Context\n ; And be injectable as a Method Argument Variable"
+      },
+      {
+        "methodName": "shouldInjectTargetedServletToInstance",
+        "methodSignature": "()",
+        "text": "Then the Targeted URL should reference the root of the Web Context where the Target is located\n ; And be injectable as an Instance Variable"
+      },
+      {
+        "methodName": "shouldInjectTargetedServletToMethodArgument",
+        "methodSignature": "(java.net.URL)",
+        "text": "Then the Targeted URL should reference the root of the Web Context where the Target is located\n ; And be injectable as a Method Argument Variable"
+      }
+    ]
+  },
+  {
+    "text": "In order to avoid duplicate configuration\n As a Tester\n I want to be able to reuse the information the container has available",
+    "className": "org.arquillian.tck.container.context.ContextLookupTestCase",
+    "categories": [
+      "EE5",
+      "EE6",
+      "Naming",
+      "War"
+    ],
+    "givens": [
+      {
+        "text": "Given any Deployment"
+      },
+      {
+        "text": "; And a Context Resource Lookup"
+      },
+      {
+        "text": "; And a InitialContext Resource Lookup"
+      }
+    ],
+    "thens": [
+      {
+        "methodName": "shouldInjectContextToInstanceContainer",
+        "methodSignature": "()",
+        "text": "Then the Context should reference the Container\n ; When running in Container\n ; And be injectable as an Instance Variable"
+      },
+      {
+        "methodName": "shouldInjectContextToMethodArgumentContainer",
+        "methodSignature": "(javax.naming.Context)",
+        "text": "Then the Context should reference the Container\n ; When running in Container\n ; And be injectable a Method Argument Variable"
+      },
+      {
+        "methodName": "shouldInjectInitialContextToInstanceContainer",
+        "methodSignature": "()",
+        "text": "Then the Context should reference the Container\n ; When running in Container\n ; And be injectable as an Instance Variable"
+      },
+      {
+        "methodName": "shouldInjectInitialContextToMethodArgumentContainer",
+        "methodSignature": "(javax.naming.InitialContext)",
+        "text": "Then the InitialContext should reference the Container\n ; When running in Container\n ; And be injectable a Method Argument Variable"
+      },
+      {
+        "methodName": "shouldInjectContextToInstanceClient",
+        "methodSignature": "()",
+        "text": "Then the Context should reference the Container\n ; When running on the Client side\n ; And be injectable as an Instance Variable"
+      },
+      {
+        "methodName": "shouldInjectContextToMethodArgumentClient",
+        "methodSignature": "(javax.naming.Context)",
+        "text": "Then the Context should reference the Container\n ; When running on the Client side\n ; And be injectable a Method Argument Variable"
+      },
+      {
+        "methodName": "shouldInjectInitialContextToInstanceClient",
+        "methodSignature": "()",
+        "text": "Then the Context should reference the Container\n ; When running on the Client side\n ; And be injectable as an Instance Variable"
+      },
+      {
+        "methodName": "shouldInjectInitialContextToMethodArgumentClient",
+        "methodSignature": "(javax.naming.InitialContext)",
+        "text": "Then the InitialContext should reference the Container\n ; When running on the Client side\n ; And be injectable a Method Argument Variable"
+      }
+    ]
+  },
+  {
+    "text": "In order to avoid duplicate configuration\n As a Tester\n I want to be able to reuse the information the container has available",
+    "className": "org.arquillian.tck.container.servlet_3_0.MultipleWebContextLookupEarTestCase",
+    "categories": [
+      "EE6",
+      "Servlet",
+      "Ear"
+    ],
+    "givens": [
+      {
+        "text": "Given two different Servlets in two different WebArchives inside an EnterpriseArchive\n ; And the Servlet is configured via Annotations\n ; And the Test run on the Client side"
+      },
+      {
+        "text": "; And a non targeted URL Resource Lookup"
+      },
+      {
+        "text": "; And a targeted URL Resource lookup for the Servlet in the first WebArchive"
+      },
+      {
+        "text": "; And a targeted URL Resource lookup for the Servlet in the second WebArchive"
+      }
+    ],
+    "thens": [
+      {
+        "methodName": "shouldInjectNonTargetedServletToInstance",
+        "methodSignature": "()",
+        "text": "Then the Non Targeted URL should reference the root of the Servers Web Context\n ; And be injectable as an Instance Variable"
+      },
+      {
+        "methodName": "shouldInjectNonTargetedServletToMethodArgument",
+        "methodSignature": "(java.net.URL)",
+        "text": "Then the Non Targeted URL should reference the root of the Servers Web Context\n ; And be injectable as a Method Argument Variable"
+      },
+      {
+        "methodName": "shouldInjectTargetedEchoServletToInstance",
+        "methodSignature": "()",
+        "text": "Then the Targeted URL should reference the root of the Web Context where the Target is located\n ; And be injectable as an Instance Variable"
+      },
+      {
+        "methodName": "shouldInjectTargetedEchoServletToMethodArgument",
+        "methodSignature": "(java.net.URL)",
+        "text": "Then the Targeted URL should reference the root of the Web Context where the Target is located\n ; And be injectable as a Method Argument Variable"
+      },
+      {
+        "methodName": "shouldInjectTargetedReverseEchoServletToInstance",
+        "methodSignature": "()",
+        "text": "Then the Targeted URL should reference the root of the Web Context where the Target is located\n ; And be injectable as an Instance Variable"
+      },
+      {
+        "methodName": "shouldInjectTargetedReverseEchoServletToMethodArgument",
+        "methodSignature": "(java.net.URL)",
+        "text": "Then the Targeted URL should reference the root of the Web Context where the Target is located\n ; And be injectable as a Method Argument Variable"
+      }
+    ]
+  },
+  {
+    "text": "In order to avoid duplicate configuration\n As a Tester\n I want to be able to reuse the information the container has available",
+    "className": "org.arquillian.tck.container.servlet_3_0.MultipleWebContextLookupMultiWarTestCase",
+    "categories": [
+      "EE6",
+      "Servlet",
+      "War",
+      "MultiDeployment"
+    ],
+    "givens": [
+      {
+        "text": "Given two different Servlets in two separate deployed WebArchives\n ; And the Servlet is configured via Annotations\n ; And the Test run on the Client side\n ; And one WebArchive is default and the one is named"
+      },
+      {
+        "text": "; And a non targeted URL Resource Lookup"
+      },
+      {
+        "text": "; And a non targeted URL Resource lookup Operating in the context of the second WebArchive"
+      },
+      {
+        "text": "; And a targeted URL Resource lookup for the Servlet in the second WebArchive"
+      }
+    ],
+    "thens": [
+      {
+        "methodName": "shouldInjectNonTargetedServletToInstance",
+        "methodSignature": "()",
+        "text": "Then the Non Targeted URL should reference the root of the first WebArchive Context\n ; When running in the default Context\n ; And be injectable as an Instance Variable"
+      },
+      {
+        "methodName": "shouldInjectNonTargetedServletToInstanceFromSameContext",
+        "methodSignature": "()",
+        "text": "Then the Non Targeted URL should reference the root of the second WebArchive \n ; When running in the named Context\n ; And be injectable as an Instance Variable"
+      },
+      {
+        "methodName": "shouldInjectNonTargetedServletToMethodArgument",
+        "methodSignature": "(java.net.URL)",
+        "text": "Then the Non Targeted URL should reference the root of the first WebArchive \n ; When running in the default Context\n ; And be injectable as a Method Argument Variable"
+      },
+      {
+        "methodName": "shouldInjectNonTargetedServletToInstanceFromNamedContext",
+        "methodSignature": "()",
+        "text": "Then the Non Targeted URL that Operates in the context of the second WebArchive should reference the root of the second WebArchive\n ; When running in the default Context\n ; And be injectable as an Instance Variable"
+      },
+      {
+        "methodName": "shouldInjectNonTargetedServletToMethodArgumentFromNamedContext",
+        "methodSignature": "(java.net.URL)",
+        "text": "Then the Non Targeted URL that Operates in the context of the second WebArchive should reference the root of the second WebArchive\n ; When running in the default Context\n ; And be injectable as a Method Argument Variable"
+      },
+      {
+        "methodName": "shouldInjectTargetedReverseServletToInstanceFromNamedContext",
+        "methodSignature": "()",
+        "text": "Then the Targeted URL that Operates in the context of the second WebArchive should reference the Web Context where the Target is located \n ; When running in the default Context\n ; And be injectable as an Instance Variable"
+      },
+      {
+        "methodName": "shouldInjectTargetedReverseServletToMethodArgumentFromNamedContext",
+        "methodSignature": "(java.net.URL)",
+        "text": "Then the Targeted URL that Operates in the context of the second WebArchive should reference the Web Context where the Target is located \n ; When running in the default Context\n ; And be injectable as a Method Argument Variable"
+      },
+      {
+        "methodName": "shouldInjectTargetedReverseServletToMethodArgumentFromSameContext",
+        "methodSignature": "(java.net.URL)",
+        "text": "Then the Targeted URL that Operates in the context of the second WebArchive should reference the Web Context where the Target is located \n ; When running in the named Context\n ; And be injectable as a Method Argument Variable"
+      }
+    ]
+  },
+  {
+    "text": "In order to avoid duplicate configuration\n As a Tester\n I want to be able to reuse the information the container has available",
+    "className": "org.arquillian.tck.container.servlet_3_0.WebContextLookupWarTestCase",
+    "categories": [
+      "EE6",
+      "Servlet",
+      "War"
+    ],
+    "givens": [
+      {
+        "text": "Given a single Servlet in a single WebArchive\n ; And the Servlet is configured via Annotations\n ; And the Test run on the Client side"
+      },
+      {
+        "text": "; And a non targeted URL Resource Lookup"
+      },
+      {
+        "text": "; And a targeted URL Resource lookup for the Servlet in the WebArchive"
+      }
+    ],
+    "thens": [
+      {
+        "methodName": "shouldInjectNonTargetedServletToInstance",
+        "methodSignature": "()",
+        "text": "Then the Non Targeted URL should reference the root of the only Web Context\n ; And be injectable as an Instance Variable"
+      },
+      {
+        "methodName": "shouldInjectNonTargetedServletToMethodArgument",
+        "methodSignature": "(java.net.URL)",
+        "text": "Then the Non Targeted URL should reference the root of the only Web Context\n ; And be injectable as a Method Argument Variable"
+      },
+      {
+        "methodName": "shouldInjectTargetedServletToInstance",
+        "methodSignature": "()",
+        "text": "Then the Targeted URL should reference the root of the Web Context where the Target is located\n ; And be injectable as an Instance Variable"
+      },
+      {
+        "methodName": "shouldInjectTargetedServletToMethodArgument",
+        "methodSignature": "(java.net.URL)",
+        "text": "Then the Targeted URL should reference the root of the Web Context where the Target is located\n ; And be injectable as a Method Argument Variable"
+      }
+    ]
+  }
+]
