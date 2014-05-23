@@ -9,14 +9,21 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Simple Servlet that echo the given @text@ request parameter 
- *
  */
 public class EchoServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+     * The Query parameter to echo
+     */
 	private static String TEXT_PARAM = "text";
 	
+   /**
+     * Echo the given text.
+     *
+     * @throws IllegalArgumentException on missing 'text' Query parameter
+     */
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
