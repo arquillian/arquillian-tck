@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- vi:ts=2:sw=2:expandtab: -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <!-- Parent -->
@@ -30,9 +29,7 @@
 
 
         <!-- External Deps -->
-        <version.arquillian_core>1.0.3.Final</version.arquillian_core>
-        <version.shrinkwrap_descriptors>2.0.0-alpha-4</version.shrinkwrap_descriptors>
-        <version.shrinkwrap_resolver>2.0.0-alpha-4</version.shrinkwrap_resolver>
+        <version.arquillian_core>1.1.4.Final</version.arquillian_core>
         <version.jboss_spec>3.0.0.Final</version.jboss_spec>
         <version.junit>4.11</version.junit>
     </properties>
@@ -66,14 +63,6 @@
                 <type>pom</type>
             </dependency>
     
-            <dependency>
-                <groupId>org.jboss.shrinkwrap.descriptors</groupId>
-                <artifactId>shrinkwrap-descriptors-bom</artifactId>
-                <version>${version.shrinkwrap_descriptors}</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-
             <!-- Java EE APIs -->
             <dependency>
                 <groupId>org.jboss.spec</groupId>
