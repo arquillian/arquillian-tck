@@ -19,7 +19,7 @@ import org.junit.runner.RunWith;
  * In order to test CDI beans
  * As a Tester
  * I want to be able to access CDI beans from the TestClass via injection 
-  */
+ */
 @Category({EE6.class, CDI.class, War.class})
 @RunWith(Arquillian.class)
 public class CDIBeanLookupWarTestCase {

@@ -22,7 +22,7 @@ import org.junit.runner.RunWith;
  * In order to avoid duplicate configuration
  * As a Tester
  * I want to be able to reuse the information the container has available 
-  */
+ */
 @Category({EE6.class, Servlet.class, War.class, MultiDeployment.class})
 @RunWith(Arquillian.class)
 public class MultipleWebContextLookupMultiWarTestCase {
@@ -62,7 +62,8 @@ public class MultipleWebContextLookupMultiWarTestCase {
 	private URL targetedReverseEchoBase;
 
 	/**
-	 * Then the Non Targeted URL should reference the root of the first WebArchive Context when running in the default Context
+	 * Then the Non Targeted URL should reference the root of the first WebArchive Context
+	 * ; When running in the default Context
 	 * ; And be injectable as an Instance Variable 
 	 */
 	@Test

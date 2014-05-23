@@ -20,7 +20,7 @@ import org.junit.runner.RunWith;
  * In order to avoid duplicate configuration
  * As a Tester
  * I want to be able to reuse the information the container has available 
-  */
+ */
 @Category({EE6.class, Servlet.class, War.class})
 @RunWith(Arquillian.class)
 public class WebContextLookupWarTestCase {

@@ -22,7 +22,7 @@ import org.junit.runner.RunWith;
  * In order to avoid duplicate configuration
  * As a Tester
  * I want to be able to reuse the information the container has available 
-  */
+ */
 @Category({EE5.class, Servlet.class, Ear.class})
 @RunWith(Arquillian.class)
 public class MultipleWebContextLookupEarTestCase {
