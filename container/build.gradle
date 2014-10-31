@@ -1,0 +1,132 @@
+plugins {
+    id "io.spring.dependency-management" version "0.2.1.RELEASE"
+}
+apply plugin: "io.spring.dependency-management"
+apply plugin: 'java'
+apply plugin: 'maven'
+
+sourceCompatibility = 1.5
+version = '1.0.0.Final-SNAPSOT'
+
+repositories {
+   mavenCentral()
+   mavenLocal()
+   maven {
+      name 'jboss'
+      url 'http://repository.jboss.org/nexus/content/groups/public/'
+   }
+}
+
+dependencyManagement {
+   imports {
+      mavenBom 'org.jboss.arquillian:arquillian-bom:1.1.5.Final'
+      mavenBom 'org.jboss.spec:jboss-javaee-6.0:3.0.0.Final'
+   }
+}
+
+ext.containers = [
+   'WildFly_8.1.0_Managed': [
+      'artifacts': ['org.wildfly:wildfly-arquillian-container-managed:8.1.0.Final'],
+      'install': 'org.wildfly:wildfly-dist:8.1.0.Final@zip',
+      'properties': [
+         'jbossHome':'build/server/wildfly-8.1.0.Final'
+      ]
+   ],
+   'TomEE_1.7.1_Embedded': [
+      'artifacts': ['org.apache.openejb:arquillian-tomee-embedded:1.7.1'],
+      'properties': [
+      ]
+   ],
+   'GlassFish_4.1_Managed': [
+      'artifacts': ['org.jboss.arquillian.container:arquillian-glassfish-managed-3.1:1.0.0.CR4'],
+      'install': 'org.glassfish.main.distributions:glassfish:4.1@zip',
+      'properties': [
+         'glassFishHome':'build/server/glassfish4'
+      ]
+   ]
+]
+
+test {
+   enabled false 
+   useJUnit {
+      //excludeCategories 'org.arquillian.tck.group.Manual'
+   }
+   exclude '**/manual/**'
+}
+
+dependencies {
+   testCompile 'org.jboss.arquillian.junit:arquillian-junit-container'
+   //testCompile 'org.jboss.shrinkwrap.descriptors:shrinkwrap-descriptors-depchain'
+   testCompile 'org.jboss.shrinkwrap.descriptors:shrinkwrap-descriptors-impl-javaee'
+
+   testCompile 'org.jboss.spec.javax.servlet:jboss-servlet-api_3.0_spec'
+   testCompile 'javax.enterprise:cdi-api'
+
+   testCompile 'junit:junit:4.+'
+}
+
+ext.containers.each { key, value -> 
+   def testTaskName = "test_" + key
+   def configurationName = key
+   def configurationInstallName = configurationName + "_install"
+   def copyInstallName = configurationName + "_install"
+   configurations.create(configurationName) {
+      description = 'Integration Test Classpath for ' + key
+      extendsFrom project.configurations.getByName('testRuntime'), project.configurations.getByName('testCompile')
+
+      if (value['artifacts']) {
+         value['artifacts'].each { artifact  ->
+            dependencies {
+               add(configurationName, artifact)
+            }
+         }
+      }
+   }
+
+   tasks.create(testTaskName, Test).configure  {
+      dependsOn(test)
+      //reports.html.enabled = false
+      reports.junitXml.destination = file('build/test-results/' + key)
+      binResultsDir = file('build/test-results/' + key)
+      description = 'Runs the TCK tests using ' + key
+      group = 'verification'
+      excludes = test.excludes
+      includes = test.includes
+      ignoreFailures = true
+      logging.captureStandardOutput(LogLevel.INFO)
+      //testReportDir = project.file(project.testReportDir.getPath() + '_' + key); // report/tests_version
+      //testResultsDir = project.file(project.testResultsDir.getPath() + '_' + key); // test-results_version
+      classpath = project.configurations.getByName(configurationName) + project.sourceSets.main.output + project.sourceSets.test.output
+
+      if(value['properties']) {
+         value['properties'].each { prop, prop_value -> 
+            systemProperty "arq.container." + key + ".configuration." + prop, prop_value
+         }
+         systemProperty "arquillian.launch", key
+      }
+   }
+
+   if (value['install']) {
+      configurations.create(configurationInstallName) {
+         description = 'Install Container Classpath for ' + key
+      }
+      dependencies {
+         add(configurationInstallName, value['install'])
+      }
+
+      tasks.create(copyInstallName, Copy) {
+         from zipTree(configurations.getByName(configurationInstallName).singleFile)
+         into file("build/server/")
+      }
+
+      tasks.getByName(testTaskName).dependsOn tasks.getByName(copyInstallName)
+   }
+
+   tasks.check.dependsOn tasks.getByName(testTaskName)
+}
+
+task testReport(type: TestReport) {
+    destinationDir = file("build/reports/all")
+    // Include the results from the `test` task in all subprojects
+    reportOn tasks.withType(Test)
+}
