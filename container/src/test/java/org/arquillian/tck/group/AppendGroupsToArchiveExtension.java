@@ -6,6 +6,10 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 
+/**
+ * Simple Arquillian Extension to auto package the JUnit Category classes.
+ *
+ */
 public class AppendGroupsToArchiveExtension implements LoadableExtension {
 
 	@Override
