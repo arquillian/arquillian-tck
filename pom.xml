@@ -31,7 +31,7 @@
         <!-- External Deps -->
         <version.arquillian_core>1.1.5.Final</version.arquillian_core>
         <version.jboss_spec>3.0.0.Final</version.jboss_spec>
-        <version.junit>4.11</version.junit>
+        <version.junit>4.13</version.junit>
     </properties>
 
     <issueManagement>
